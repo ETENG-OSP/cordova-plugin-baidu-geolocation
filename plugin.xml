@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin id="com.eteng.mobile.plugin.geolocation.baidu">
+
+	<platform name="android">
+		<preference name="ACCESS_KEY" />
+		
+		<js-module src="www/Geolocation.js">
+			<clobbers target="navigator.geolocation" />
+		</js-module>
+		
+		<config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BaiduGeolocation">
+	            <param name="android-package" value="com.eteng.mobile.plugin.geolocation.baidu.GeolocationPlugin" />
+	        </feature>
+        </config-file>
+        
+	<source-file src="src/android/com/eteng/mobile/plugin/geolocation/Coordinates.java" target-dir="src/com/eteng/mobile/plugin/geolocation" />
+        <source-file src="src/android/com/eteng/mobile/plugin/geolocation/Position.java" target-dir="src/com/eteng/mobile/plugin/geolocation" />
+        <source-file src="src/android/com/eteng/mobile/plugin/geolocation/baidu/GeolocationPlugin.java" target-dir="src/com/eteng/mobile/plugin/geolocation/baidu" />
+        <source-file src="src/android/com/eteng/mobile/plugin/geolocation/baidu/MessageBuilder.java" target-dir="src/com/eteng/mobile/plugin/geolocation/baidu" />
+        <source-file src="src/android/com/eteng/mobile/plugin/geolocation/baidu/RequestLocationTask.java" target-dir="src/com/eteng/mobile/plugin/geolocation/baidu" />
+        <source-file src="src/android/com/eteng/mobile/plugin/geolocation/baidu/WatchListener.java" target-dir="src/com/eteng/mobile/plugin/geolocation/baidu" />
+        
+        <source-file src="lib/android/libs/armeabi/liblocSDK4d.so" target-dir="libs/armeabi" />
+        <source-file src="lib/android/libs/armeabi-v7a/liblocSDK4d.so" target-dir="libs/armeabi-v7a" />
+        <source-file src="lib/android/libs/locSDK_4.2.jar" target-dir="libs" />
+        
+        <config-file target="AndroidManifest.xml" parent="/*">
+			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+			<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+			<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+			<uses-permission android:name="android.permission.READ_PHONE_STATE" />
+			<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+			<uses-permission android:name="android.permission.INTERNET" />
+			<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+			<uses-permission android:name="android.permission.READ_LOGS" />
+        </config-file>
+        
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
+            <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="$ACCESS_KEY"/>
+        </config-file>
+
+	</platform>
+</plugin>

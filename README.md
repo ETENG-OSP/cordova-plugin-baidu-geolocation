@@ -20,7 +20,7 @@ var options = {
 持续追踪位置变更
 
 ### window.geolocation.clearWatch(watchId);
-清楚位置追踪
+清除位置追踪
 
 安装方法
 -------

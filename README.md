@@ -6,13 +6,20 @@ Cordova 百度定位插件，兼容 w3c 的 geolocation 标准，解决中国大
 使用方法
 --------
 
-### window.geolocation.getCurrentPosition(success, error, options);
+### window.geolocation.getCurrentPosition(success, error, [options]);
 获取当前位置
+```
+var options = {
+  enableHighAccuracy: true,  // 是否使用 GPS
+  maximumAge: 30000,         // 缓存时间
+  timeout: 27000             // 超时时间
+}
+```
 
-### window.watchPosition(success, error, options);
+### window.geolocation.watchPosition(success, error, [options]);
 持续追踪位置变更
 
-### window.clearWatch(watchId);
+### window.geolocation.clearWatch(watchId);
 清楚位置追踪
 
 安装方法

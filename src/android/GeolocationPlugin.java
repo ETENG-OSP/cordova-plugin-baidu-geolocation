@@ -7,10 +7,6 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.location.LocationClientOption.LocationMode;
-
 import android.util.Log;
 
 public class GeolocationPlugin extends CordovaPlugin {
@@ -123,21 +119,10 @@ public class GeolocationPlugin extends CordovaPlugin {
 		// public static final int RESULT_SERVICE_STOPED = 1;
 		// public static final int RESULT_NO_LISTENER = 2;
 		// public static final int RESULT_TOO_FAST = 6;
-		
-		LocationClient client = new LocationClient(cordova.getActivity().getApplicationContext());
-		LocationClientOption options = new LocationClientOption();
-		
-		
-        options.setLocationMode(LocationMode.Hight_Accuracy);
-        options.setCoorType(COORD_BD09LL);
-        client.setLocOption(options);
+
         
-		new CDVLocationListener(client, callback);
-		
-		client.start();
-		int result = client.requestLocation();
-		
-		Log.i(TAG, "result: " + result);
+		CDVLocationListener listener = new CDVLocationListener(cordova.getActivity().getApplicationContext(), callback);
+		listener.getCurrentPosition();
 		return true;
 	}
 

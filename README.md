@@ -8,7 +8,7 @@ Cordova 百度定位插件，兼容 w3c 的 geolocation 标准，解决中国大
 使用方法
 --------
 
-### window.geolocation.getCurrentPosition(success, error, [options]);
+### navigator.geolocation.getCurrentPosition(success, error, [options]);
 获取当前位置
 ```
 var options = {
@@ -18,10 +18,10 @@ var options = {
 }
 ```
 
-### window.geolocation.watchPosition(success, error, [options]);
+### navigator.geolocation.watchPosition(success, error, [options]);
 持续追踪位置变更
 
-### window.geolocation.clearWatch(watchId);
+### navigator.geolocation.clearWatch(watchId);
 清除位置追踪
 
 安装方法

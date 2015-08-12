@@ -1,4 +1,4 @@
-package com.eteng.mobile.plugin.geolocation;
+package com.eteng.geolocation.w3;
 
 public class PositionError {
 

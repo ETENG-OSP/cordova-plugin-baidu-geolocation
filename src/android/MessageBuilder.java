@@ -1,12 +1,12 @@
-package com.eteng.mobile.plugin.geolocation.baidu;
+package com.eteng.geolocation.baidu;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.baidu.location.BDLocation;
-import com.eteng.mobile.plugin.geolocation.Coordinates;
-import com.eteng.mobile.plugin.geolocation.Position;
+import com.eteng.geolocation.w3.Coordinates;
+import com.eteng.geolocation.w3.Position;
 
 public class MessageBuilder {
 	

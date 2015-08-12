@@ -1,4 +1,4 @@
-package com.eteng.mobile.plugin.geolocation.baidu;
+package com.eteng.geolocation.baidu;
 
 import java.util.Stack;
 

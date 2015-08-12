@@ -9,9 +9,9 @@ import android.util.Log;
 import com.baidu.location.LocationClient;
 
 public class RequestLocationTask implements Runnable {
-	
+
 	private static final String TAG = "RequestLocationTask";
-	
+
 	public static final int RESULT_SUCCESS = 0;
 	public static final int RESULT_SERVICE_STOPED = 1;
 	public static final int RESULT_NO_LISTENER = 2;
@@ -20,7 +20,7 @@ public class RequestLocationTask implements Runnable {
 	CallbackContext callback;
 	LocationClient client;
 	Stack<CallbackContext> stack;
-	
+
 	RequestLocationTask(LocationClient client, Stack<CallbackContext> stack, CallbackContext callback) {
 		this.client = client;
 		this.stack = stack;
@@ -35,7 +35,7 @@ public class RequestLocationTask implements Runnable {
 			stack.push(callback);
 			return;
 		}
-		
+
 		callback.error(result);
 	}
 

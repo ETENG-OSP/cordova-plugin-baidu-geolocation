@@ -1,4 +1,4 @@
-BaiduGeolocationPlugin
+Baidu Geolocation for Cordova
 ======================
 
 Baidu 定位 SDK 版本：6.0.5
@@ -28,5 +28,5 @@ var options = {
 -------
 
 ```
-cordova plugin add https://github.com/gengen1988/BaiduGeolocationPlugin.git --variable ACCESS_KEY={{your access key}}
+cordova plugin add https://github.com/gengen1988/cordova-plugin-baidu-geolocation.git --variable ACCESS_KEY={{your access key}}
 ```

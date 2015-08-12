@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<plugin id="com.eteng.mobile.plugin.geolocation.baidu">
+<plugin id="cordova-plugin-baidu-geolocation" version="0.1.0">
+
+  <name>BaiduGeolocation</name>
+
+  <preference name="ACCESS_KEY" />
 
   <platform name="android">
-    <preference name="ACCESS_KEY" />
 
     <js-module src="www/Geolocation.js">
       <clobbers target="navigator.geolocation" />
@@ -10,20 +13,22 @@
 
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="BaiduGeolocation">
-        <param name="android-package" value="com.eteng.mobile.plugin.geolocation.baidu.GeolocationPlugin" />
+        <param name="android-package" value="com.eteng.geolocation.baidu.GeolocationPlugin" />
       </feature>
     </config-file>
 
-    <source-file src="src/android/com/eteng/mobile/plugin/geolocation/Coordinates.java" target-dir="src/com/eteng/mobile/plugin/geolocation" />
-    <source-file src="src/android/com/eteng/mobile/plugin/geolocation/Position.java" target-dir="src/com/eteng/mobile/plugin/geolocation" />
-    <source-file src="src/android/com/eteng/mobile/plugin/geolocation/baidu/GeolocationPlugin.java" target-dir="src/com/eteng/mobile/plugin/geolocation/baidu" />
-    <source-file src="src/android/com/eteng/mobile/plugin/geolocation/baidu/MessageBuilder.java" target-dir="src/com/eteng/mobile/plugin/geolocation/baidu" />
-    <source-file src="src/android/com/eteng/mobile/plugin/geolocation/baidu/RequestLocationTask.java" target-dir="src/com/eteng/mobile/plugin/geolocation/baidu" />
-    <source-file src="src/android/com/eteng/mobile/plugin/geolocation/baidu/WatchListener.java" target-dir="src/com/eteng/mobile/plugin/geolocation/baidu" />
+    <source-file src="src/android/w3/Coordinates.java" target-dir="src/com/eteng/geolocation/w3" />
+    <source-file src="src/android/w3/Position.java" target-dir="src/com/eteng/geolocation/w3" />
+    <source-file src="src/android/w3/PositionOptions.java" target-dir="src/com/eteng/geolocation/w3" />
+    <source-file src="src/android/w3/PositionError.java" target-dir="src/com/eteng/geolocation/w3" />
+    <source-file src="src/android/GeolocationPlugin.java" target-dir="src/com/eteng/geolocation/baidu" />
+    <source-file src="src/android/MessageBuilder.java" target-dir="src/com/eteng/geolocation/baidu" />
+    <source-file src="src/android/RequestLocationTask.java" target-dir="src/com/eteng/geolocation/baidu" />
+    <source-file src="src/android/WatchListener.java" target-dir="src/com/eteng/geolocation/baidu" />
 
-    <source-file src="lib/android/libs/armeabi/liblocSDK4d.so" target-dir="libs/armeabi" />
-    <source-file src="lib/android/libs/armeabi-v7a/liblocSDK4d.so" target-dir="libs/armeabi-v7a" />
-    <source-file src="lib/android/libs/locSDK_4.2.jar" target-dir="libs" />
+    <source-file src="src/android/libs_6a/armeabi/liblocSDK6a.so" target-dir="libs/armeabi" />
+    <source-file src="src/android/libs_6a/armeabi-v7a/liblocSDK6a.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="src/android/libs_6a/locSDK_6.05.jar" target-dir="libs" />
 
     <config-file target="AndroidManifest.xml" parent="/*">
       <!-- 这个权限用于进行网络定位-->

@@ -1,6 +1,8 @@
 BaiduGeolocationPlugin
 ======================
 
+Baidu 定位 SDK 版本：6.0.5
+
 Cordova 百度定位插件，兼容 w3c 的 geolocation 标准，解决中国大陆手机无法定位的问题。使用前需要在百度申请应用。
 
 使用方法

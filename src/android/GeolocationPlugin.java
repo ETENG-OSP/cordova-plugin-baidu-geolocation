@@ -119,12 +119,9 @@ public class GeolocationPlugin extends CordovaPlugin {
 		// public static final int RESULT_SERVICE_STOPED = 1;
 		// public static final int RESULT_NO_LISTENER = 2;
 		// public static final int RESULT_TOO_FAST = 6;
-
-    // TODO uncomment me
-		// CDVLocationListener listener = new CDVLocationListener(cordova.getActivity().getApplicationContext(), callback);
-		// listener.getCurrentPosition();
-
-		callback.success();
+		//
+		CDVLocationListener listener = new CDVLocationListener(cordova.getActivity().getApplicationContext(), callback);
+		listener.getCurrentPosition();
 		return true;
 	}
 

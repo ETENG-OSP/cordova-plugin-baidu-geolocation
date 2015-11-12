@@ -28,9 +28,9 @@
     <source-file src="src/android/RequestLocationTask.java" target-dir="src/com/eteng/geolocation/baidu" />
     <source-file src="src/android/WatchListener.java" target-dir="src/com/eteng/geolocation/baidu" />
 
-    <source-file src="src/android/libs_6a/armeabi/liblocSDK6a.so" target-dir="libs/armeabi" />
-    <source-file src="src/android/libs_6a/armeabi-v7a/liblocSDK6a.so" target-dir="libs/armeabi-v7a" />
-    <source-file src="src/android/libs_6a/locSDK_6.05.jar" target-dir="libs" />
+    <source-file src="src/android/libs/armeabi/liblocSDK6a.so" target-dir="libs/armeabi" />
+    <source-file src="src/android/libs/armeabi-v7a/liblocSDK6a.so" target-dir="libs/armeabi-v7a" />
+    <source-file src="src/android/libs/locSDK_6.13.jar" target-dir="libs" />
 
     <config-file target="AndroidManifest.xml" parent="/*">
       <!-- 这个权限用于进行网络定位-->

@@ -8,7 +8,7 @@ Cordova 百度定位插件，兼容 w3c 的 geolocation 标准，解决中国大
 使用方法
 --------
 
-### navigator.geolocation.getCurrentPosition(success, error, [options]);
+### navigator.geolocation.getCurrentPosition(success, [error], [options]);
 获取当前位置
 ```
 var options = {
@@ -47,7 +47,7 @@ extra 定义：
 }
 ```
 
-### navigator.geolocation.watchPosition(success, error, [options]);
+### navigator.geolocation.watchPosition(success, [error], [options]);
 持续追踪位置变更
 
 ### navigator.geolocation.clearWatch(watchId);
@@ -57,5 +57,5 @@ extra 定义：
 -------
 
 ```
-cordova plugin add https://github.com/gengen1988/cordova-plugin-baidu-geolocation.git --variable ACCESS_KEY={{your access key}}
+cordova plugin add https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git --variable API_KEY={{your api key}}
 ```

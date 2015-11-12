@@ -3,7 +3,7 @@
 
   <name>BaiduGeolocation</name>
 
-  <preference name="ACCESS_KEY" />
+  <preference name="API_KEY" />
 
   <platform name="android">
 
@@ -56,7 +56,7 @@
 
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"></service>
-      <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="$ACCESS_KEY"/>
+      <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="$API_KEY"/>
     </config-file>
 
   </platform>

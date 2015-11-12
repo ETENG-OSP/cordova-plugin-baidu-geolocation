@@ -9,6 +9,8 @@ var ACTION_CLEAR_WATCH = 'clearWatch';
 
 var geolocation = module.exports = {};
 
+var idGenerator = 0;
+
 geolocation.getCurrentPosition = function (success, error, options) {
   cordova.exec(function(args) {
     success.apply(null, args);
@@ -16,9 +18,11 @@ geolocation.getCurrentPosition = function (success, error, options) {
 };
 
 geolocation.watchPosition = function (success, error, options) {
+  var watchId = idGenerator++;
   cordova.exec(function(args) {
     success.apply(null, args);
-  }, error, SERVICE_NAME, ACTION_WATCH_POSITION, [options]);
+  }, error, SERVICE_NAME, ACTION_WATCH_POSITION, [options, watchId]);
+  return watchId;
 };
 
 geolocation.clearWatch = function (watchId) {

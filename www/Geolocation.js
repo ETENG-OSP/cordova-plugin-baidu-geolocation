@@ -26,9 +26,5 @@ geolocation.watchPosition = function (success, error, options) {
 };
 
 geolocation.clearWatch = function (watchId) {
-  cordova.exec(function () {
-    alert(JSON.stringify(arguments));
-  }, function () {
-    alert('fail');
-  }, SERVICE_NAME, ACTION_CLEAR_WATCH, [watchId]);
+  cordova.exec(null, null, SERVICE_NAME, ACTION_CLEAR_WATCH, [watchId]);
 };

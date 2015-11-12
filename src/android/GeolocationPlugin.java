@@ -17,7 +17,7 @@ public class GeolocationPlugin extends CordovaPlugin {
   private static final String ACTION_WATCH_POSITION = "watchPosition";
   private static final String ACTION_CLEAR_WATCH = "clearWatch";
 
-  private Map<int, CDVLocationListener> watches = new HashMap<int, CDVLocationListener>();
+  private Store store = new Store();
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -26,6 +26,7 @@ public class GeolocationPlugin extends CordovaPlugin {
       return getCurrentPosition(options, callbackContext);
     } else if (ACTION_WATCH_POSITION.equals(action)) {
       JSONObject options = args.getJSONObject(0);
+      int watchId = args.getInt(1);
       return watchPosition(options, callbackContext);
     } else if (ACTION_CLEAR_WATCH.equals(action)) {
       int watchId = args.getInt(0);
@@ -36,15 +37,18 @@ public class GeolocationPlugin extends CordovaPlugin {
 
   private boolean clearWatch(int watchId, CallbackContext callback) {
     Log.i(TAG, "停止监听");
-    return false;
+    BDGeolocation geolocation = store.get(watchId);
+    store.remove(watchId);
+    return geolocation.clearWatch();
   }
 
-  private boolean watchPosition(JSONObject options, CallbackContext callback) {
+  private boolean watchPosition(JSONObject options, int watchId, CallbackContext callback) {
     Log.i(TAG, "监听位置变化");
     Context ctx = cordova.getActivity().getApplicationContext();
     PositionOptions positionOpts = new PositionOptions(options);
-    CDVLocationListener listener = new CDVLocationListener(ctx);
-    return listener.watchPosition(positionOpts, new CDVPositionListener() {
+    BDGeolocation geolocation = new BDGeolocation(ctx);
+    store.put(geolocation, watchId);
+    return geolocation.watchPosition(positionOpts, new CDVPositionListener() {
       @Override
       public void onReceivePosition(JSONArray message) {
         callback.setNoStop(true);
@@ -57,9 +61,8 @@ public class GeolocationPlugin extends CordovaPlugin {
     Log.i(TAG, "请求当前地理位置");
     Context ctx = cordova.getActivity().getApplicationContext();
     PositionOptions positionOpts = new PositionOptions(options);
-    CDVLocationListener listener = new CDVLocationListener(ctx);
-
-    return listener.getCurrentPosition(positionOpts, new CDVPositionListener() {
+    BDGeolocation geolocation = new BDGeolocation(ctx);
+    return geolocation.getCurrentPosition(positionOpts, new CDVPositionListener() {
       @Override
       public void onReceivePosition(JSONArray message) {
         callback.send(message);

@@ -1,7 +1,7 @@
 Baidu Geolocation for Cordova
 ======================
 
-Baidu 定位 SDK 版本：6.0.5
+Baidu 定位 SDK 版本：6.1.3
 
 Cordova 百度定位插件，兼容 w3c 的 geolocation 标准，解决中国大陆手机无法定位的问题。使用前需要在百度申请应用。
 
@@ -15,6 +15,35 @@ var options = {
   enableHighAccuracy: true,  // 是否使用 GPS
   maximumAge: 30000,         // 缓存时间
   timeout: 27000             // 超时时间
+}
+```
+
+succes 原型：
+```
+function success(position, extra) {
+}
+```
+
+position 定义：
+```
+{
+  "coords": {
+    "latitude": "number",
+    "longitude": "number",
+    "altitude": "number",
+    "accuracy": "number",
+    "altitudeAccuracy": "number",
+    "heading": "string",
+    "speed": "number"
+  },
+  "timestamp": "number"
+}
+```
+
+extra 定义：
+```
+{
+  "type": "string"
 }
 ```
 

@@ -14,7 +14,6 @@ import android.util.Log;
 
 public class CDVLocationListener implements BDLocationListener {
 
-  private CallbackContext callback;
   private String TAG = "CDVLocationListener";
   private LocationClient client;
 
@@ -22,9 +21,12 @@ public class CDVLocationListener implements BDLocationListener {
   public static final String COORD_BD09 = "bd09";
   public static final String COORD_GCJ02 = "gcj02";
 
-  CDVLocationListener(Context context, CallbackContext callback) {
+  CDVLocationListener(Context context) {
     client = new LocationClient(context);
-    this.callback = callback;
+    LocationClientOption options = new LocationClientOption();
+    options.setLocationMode(LocationMode.Hight_Accuracy);
+    options.setCoorType(COORD_BD09LL);
+    client.setLocOption(options);
   }
 
   @Override
@@ -41,14 +43,14 @@ public class CDVLocationListener implements BDLocationListener {
     this.callback = null;
   }
 
-  public void getCurrentPosition() {
-    LocationClientOption options = new LocationClientOption();
-    options.setLocationMode(LocationMode.Hight_Accuracy);
-    options.setCoorType(COORD_BD09LL);
-    client.setLocOption(options);
-
+  public boolean getCurrentPosition(PositionOptions options, CallbackContext callback) {
     client.start();
     client.registerLocationListener(this);
+    return true;
+  }
+
+  public boolean watchPosition(PositionOptions options, CallbackContext callback) {
+    return false;
   }
 
 }

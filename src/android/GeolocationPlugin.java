@@ -1,13 +1,19 @@
 package com.eteng.geolocation.baidu;
 
 import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.eteng.geolocation.w3.PositionOptions;
+
+import android.content.Context;
 import android.util.Log;
+import android.util.SparseArray;
 
 public class GeolocationPlugin extends CordovaPlugin {
 
@@ -17,7 +23,7 @@ public class GeolocationPlugin extends CordovaPlugin {
   private static final String ACTION_WATCH_POSITION = "watchPosition";
   private static final String ACTION_CLEAR_WATCH = "clearWatch";
 
-  private Store store = new Store();
+  private SparseArray<BDGeolocation> store = new SparseArray<BDGeolocation>();
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -27,7 +33,7 @@ public class GeolocationPlugin extends CordovaPlugin {
     } else if (ACTION_WATCH_POSITION.equals(action)) {
       JSONObject options = args.getJSONObject(0);
       int watchId = args.getInt(1);
-      return watchPosition(options, callbackContext);
+      return watchPosition(options, watchId, callbackContext);
     } else if (ACTION_CLEAR_WATCH.equals(action)) {
       int watchId = args.getInt(0);
       return clearWatch(watchId, callbackContext);
@@ -39,20 +45,24 @@ public class GeolocationPlugin extends CordovaPlugin {
     Log.i(TAG, "停止监听");
     BDGeolocation geolocation = store.get(watchId);
     store.remove(watchId);
-    return geolocation.clearWatch();
+    geolocation.clearWatch();
+    callback.success();
+    return true;
   }
 
-  private boolean watchPosition(JSONObject options, int watchId, CallbackContext callback) {
+  private boolean watchPosition(JSONObject options, int watchId, final CallbackContext callback) {
     Log.i(TAG, "监听位置变化");
     Context ctx = cordova.getActivity().getApplicationContext();
     PositionOptions positionOpts = new PositionOptions(options);
     BDGeolocation geolocation = new BDGeolocation(ctx);
-    store.put(geolocation, watchId);
-    return geolocation.watchPosition(positionOpts, new CDVPositionListener() {
+    store.put(watchId, geolocation);
+    return geolocation.watchPosition(positionOpts, new BDLocationListener() {
       @Override
-      public void onReceivePosition(JSONArray message) {
-        callback.setNoStop(true);
-        callback.send(message);
+      public void onReceiveLocation(BDLocation location) {
+        JSONArray message = new MessageBuilder(location).build();
+        PluginResult result = new PluginResult(PluginResult.Status.OK, message);
+        result.setKeepCallback(true);
+        callback.sendPluginResult(result);
       }
     });
   }
@@ -62,10 +72,11 @@ public class GeolocationPlugin extends CordovaPlugin {
     Context ctx = cordova.getActivity().getApplicationContext();
     PositionOptions positionOpts = new PositionOptions(options);
     BDGeolocation geolocation = new BDGeolocation(ctx);
-    return geolocation.getCurrentPosition(positionOpts, new CDVPositionListener() {
+    return geolocation.getCurrentPosition(positionOpts, new BDLocationListener() {
       @Override
-      public void onReceivePosition(JSONArray message) {
-        callback.send(message);
+      public void onReceiveLocation(BDLocation location) {
+        JSONArray message = new MessageBuilder(location).build();
+        callback.success(message);
       }
     });
   }

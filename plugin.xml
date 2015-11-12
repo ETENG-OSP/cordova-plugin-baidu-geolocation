@@ -22,12 +22,9 @@
     <source-file src="src/android/w3/PositionOptions.java" target-dir="src/com/eteng/geolocation/w3" />
     <source-file src="src/android/w3/PositionError.java" target-dir="src/com/eteng/geolocation/w3" />
 
-    <source-file src="src/android/Store.java" target-dir="src/com/eteng/geolocation/baidu" />
-    <source-file src="src/android/CDVLocationListener.java" target-dir="src/com/eteng/geolocation/baidu" />
+    <source-file src="src/android/BDGeolocation.java" target-dir="src/com/eteng/geolocation/baidu" />
     <source-file src="src/android/GeolocationPlugin.java" target-dir="src/com/eteng/geolocation/baidu" />
     <source-file src="src/android/MessageBuilder.java" target-dir="src/com/eteng/geolocation/baidu" />
-    <source-file src="src/android/RequestLocationTask.java" target-dir="src/com/eteng/geolocation/baidu" />
-    <source-file src="src/android/WatchListener.java" target-dir="src/com/eteng/geolocation/baidu" />
 
     <source-file src="src/android/libs/armeabi/liblocSDK6a.so" target-dir="libs/armeabi" />
     <source-file src="src/android/libs/armeabi-v7a/liblocSDK6a.so" target-dir="libs/armeabi-v7a" />

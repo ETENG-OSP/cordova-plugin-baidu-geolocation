@@ -24,7 +24,7 @@ public class BDGeolocation {
     client = new LocationClient(context);
     LocationClientOption options = new LocationClientOption();
     options.setLocationMode(LocationMode.Hight_Accuracy);
-    options.setCoorType(COORD_BD09LL);
+    options.setCoorType(COORD_GCJ02);
     client.setLocOption(options);
   }
 

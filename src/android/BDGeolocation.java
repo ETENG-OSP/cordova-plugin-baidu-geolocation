@@ -28,6 +28,12 @@ public class BDGeolocation {
     client.setLocOption(options);
   }
 
+  private void setOptions(PositionOptions options) {
+	  LocationClientOption bdoptions = client.getLocOption();
+	  bdoptions.setCoorType(options.getCoorType());
+	  client.setLocOption(bdoptions);
+  }
+
   public boolean getCurrentPosition(PositionOptions options, final BDLocationListener callback) {
     listener = new BDLocationListener() {
       @Override
@@ -36,6 +42,7 @@ public class BDGeolocation {
         clearWatch();
       }
     };
+    setOptions(options);
     client.registerLocationListener(listener);
     client.start();
     return true;
@@ -43,6 +50,7 @@ public class BDGeolocation {
 
   public boolean watchPosition(PositionOptions options, BDLocationListener callback) {
     listener = callback;
+    setOptions(options);
     client.registerLocationListener(listener);
     client.start();
     return true;

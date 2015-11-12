@@ -7,8 +7,20 @@ public class PositionOptions {
   boolean enableHighAccuracy;
   long maximumAge;
   long timeout;
+  String coorType;
 
   public PositionOptions(JSONObject options) {
+    try {
+      this.coorType = options.getString("coorType");
+    } catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+  public String getCoorType() {
+    return this.coorType;
+  }
+  public void setCoorType(String coorType) {
+    this.coorType = coorType;
   }
   public boolean isEnableHighAccuracy() {
     return enableHighAccuracy;

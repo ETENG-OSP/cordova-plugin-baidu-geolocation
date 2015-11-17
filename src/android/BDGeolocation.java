@@ -22,16 +22,25 @@ public class BDGeolocation {
 
   BDGeolocation(Context context) {
     client = new LocationClient(context);
-    LocationClientOption options = new LocationClientOption();
-    options.setLocationMode(LocationMode.Hight_Accuracy);
-    options.setCoorType(COORD_GCJ02);
-    client.setLocOption(options);
   }
 
   private void setOptions(PositionOptions options) {
-	  LocationClientOption bdoptions = client.getLocOption();
-	  bdoptions.setCoorType(options.getCoorType());
-	  client.setLocOption(bdoptions);
+    // set default coorType
+    String coorType = options.getCoorType();
+    if (coorType == null || coorType.trim().isEmpty()) {
+      coorType = COORD_GCJ02;
+    }
+
+    // set default locationMode
+    LocationMode locationMode = LocationMode.Battery_Saving;
+    if (options.isEnableHighAccuracy()) {
+      locationMode = LocationMode.Hight_Accuracy;
+    }
+
+    LocationClientOption bdoptions = new LocationClientOption();
+    bdoptions.setCoorType(coorType);
+    bdoptions.setLocationMode(locationMode);
+    client.setLocOption(bdoptions);
   }
 
   public boolean getCurrentPosition(PositionOptions options, final BDLocationListener callback) {

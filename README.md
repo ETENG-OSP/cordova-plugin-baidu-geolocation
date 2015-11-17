@@ -14,7 +14,7 @@ Cordova 百度定位插件，兼容 w3c 的 geolocation 标准，解决中国大
 var options = {
   enableHighAccuracy: true,  // 是否使用 GPS
   maximumAge: 30000,         // 缓存时间
-  timeout: 27000             // 超时时间
+  timeout: 27000,            // 超时时间
   coorType: 'bd09ll'         // 默认是 gcj02，可填 bd09ll 以获取百度经纬度用于访问百度 API
 }
 ```

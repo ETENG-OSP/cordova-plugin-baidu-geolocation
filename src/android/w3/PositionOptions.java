@@ -3,9 +3,13 @@ package com.eteng.geolocation.w3;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 public class PositionOptions {
 
-  Boolean enableHighAccuracy;
+  private static final String TAG = "PositionOptions";
+
+  Boolean enableHighAccuracy = false;
   long maximumAge;
   long timeout;
   String coorType;
@@ -14,12 +18,12 @@ public class PositionOptions {
     try {
       this.enableHighAccuracy = options.getBoolean("enableHighAccuracy");
     } catch (JSONException e) {
-      e.printStackTrace();
+      Log.v(TAG, "enableHighAccuracy 未定义");
     }
     try {
       this.coorType = options.getString("coorType");
     } catch (JSONException e) {
-      e.printStackTrace();
+      Log.v(TAG, "coorType 未定义");
     }
   }
 

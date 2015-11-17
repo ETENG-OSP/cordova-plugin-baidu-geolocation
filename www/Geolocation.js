@@ -12,6 +12,12 @@ var geolocation = module.exports = {};
 var idGenerator = 0;
 
 geolocation.getCurrentPosition = function (success, error, options) {
+  if (typeof sucess === 'object') {
+    options = success;
+  }
+  if (typeof error === 'object') {
+    options = error;
+  }
   cordova.exec(function(args) {
     success.apply(null, args);
   }, error, SERVICE_NAME, ACTION_GET_CURRENT_POSITION, [options]);

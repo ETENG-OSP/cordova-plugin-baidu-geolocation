@@ -17,7 +17,7 @@ import android.util.SparseArray;
 
 public class GeolocationPlugin extends CordovaPlugin {
 
-  private static final String TAG = "BaiduGeoLocationPlugin";
+  private static final String TAG = "GeolocationPlugin";
 
   private static final String ACTION_GET_CURRENT_POSITION = "getCurrentPosition";
   private static final String ACTION_WATCH_POSITION = "watchPosition";
@@ -27,11 +27,21 @@ public class GeolocationPlugin extends CordovaPlugin {
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    Log.i(TAG, "插件调用");
+    JSONObject options = new JSONObject();
     if (ACTION_GET_CURRENT_POSITION.equals(action)) {
-      JSONObject options = args.getJSONObject(0);
+      try {
+        options = args.getJSONObject(0);
+      } catch (JSONException e) {
+        Log.v(TAG, "options 未传入");
+      }
       return getCurrentPosition(options, callbackContext);
     } else if (ACTION_WATCH_POSITION.equals(action)) {
-      JSONObject options = args.getJSONObject(0);
+      try {
+        options = args.getJSONObject(0);
+      } catch (JSONException e) {
+        Log.v(TAG, "options 未传入");
+      }
       int watchId = args.getInt(1);
       return watchPosition(options, watchId, callbackContext);
     } else if (ACTION_CLEAR_WATCH.equals(action)) {

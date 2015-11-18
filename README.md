@@ -28,8 +28,10 @@ Cordova 百度定位插件，兼容 W3C 的 geolocation 标准，解决中国大
 安装方法
 -------
 
-```
-cordova plugin add https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git --variable API_KEY=百度分配的AK --save
+在控制台里，进入 cordova 项目目录，执行以下命令：
+
+```bash
+$ cordova plugin add https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git --variable API_KEY=百度分配的AK --save
 ```
 
 关于 API_KEY
@@ -89,4 +91,9 @@ extra 定义：
 
 ## 关于坐标系
 
+由于 Baidu 定位的限制，这个插件仅能获取中国偏移坐标系 GCJ02 与 BD09LL（LL 指代经纬度）。如果需要坐标系的转换，请使用第三方服务。
 
+如果期望离线转换坐标系，可以使用这个算法：
+https://github.com/googollee/eviltransform
+
+这个插件不对转换的结果负责

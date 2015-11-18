@@ -11,11 +11,14 @@ Cordova 百度定位插件，兼容 W3C 的 geolocation 标准，解决中国大
 
 ```xml
 ...
+  <!-- android 使用本插件 -->
   <platform name="android">
     <plugin name="cordova-plugin-baidu-geolocation" spec="https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation">
       <variable name="API_KEY" value="百度分配的AK" />
     </plugin>
   </platform>
+  
+  <!-- iOS 使用官方插件 -->
   <platform name="ios">
     <plugin name="cordova-plugin-geolocation" spec="~1.0.0" />
   </platform>

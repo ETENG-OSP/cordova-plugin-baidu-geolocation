@@ -86,6 +86,8 @@ extra 定义：
 ### navigator.geolocation.watchPosition(success, [error], [options]);
 持续追踪位置变更
 
+返回值：watchId
+
 ### navigator.geolocation.clearWatch(watchId);
 清除位置追踪
 

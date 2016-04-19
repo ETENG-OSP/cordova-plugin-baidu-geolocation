@@ -1,7 +1,7 @@
 Baidu Geolocation for Cordova
 ======================
 
-Baidu 定位 SDK 版本：6.1.3
+Baidu 定位 SDK 版本：6.2.3
 
 Cordova 版本：5.0.0
 

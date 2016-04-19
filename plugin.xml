@@ -8,7 +8,7 @@
   <platform name="android">
 
     <js-module src="www/Geolocation.js">
-      <clobbers target="navigator.geolocation" />
+      <clobbers target="window.navigator.geolocation" />
     </js-module>
 
     <config-file target="res/xml/config.xml" parent="/*">

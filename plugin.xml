@@ -56,5 +56,6 @@
       <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="$API_KEY"/>
     </config-file>
 
+     <dependency id="cordova-plugin-compat" version="^1.0.0" />
   </platform>
 </plugin>

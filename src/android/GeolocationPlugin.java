@@ -22,10 +22,6 @@ public class GeolocationPlugin extends CordovaPlugin {
 
   private static final String TAG = "GeolocationPlugin";
 
-  private static final String ACTION_GET_CURRENT_POSITION = "getCurrentPosition";
-  private static final String ACTION_WATCH_POSITION = "watchPosition";
-  private static final String ACTION_CLEAR_WATCH = "clearWatch";
-
   private static final int GET_CURRENT_POSITION = 0;
   private static final int WATCH_POSITION = 1;
   private static final int CLEAR_WATCH = 2;
@@ -35,31 +31,25 @@ public class GeolocationPlugin extends CordovaPlugin {
 
   private JSONArray requestArgs;
   private CallbackContext context;
-  private JSONObject options;
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
     Log.i(TAG, "插件调用");
-    options = new JSONObject();
-    requestArgs = args;
+    JSONObject options = new JSONObject();
 
-    //权限请求
+    requestArgs = args;
     context = callbackContext;
-    
-    if (ACTION_GET_CURRENT_POSITION.equals(action)) {
-      if(!hasPermisssion()){
-        PermissionHelper.requestPermissions(this, GET_CURRENT_POSITION, permissions);
-      }
+
+    if (action.equals("getCurrentPosition")) {
+      getPermission(GET_CURRENT_POSITION);
       try {
         options = args.getJSONObject(0);
       } catch (JSONException e) {
         Log.v(TAG, "options 未传入");
       }
       return getCurrentPosition(options, callbackContext);
-    } else if (ACTION_WATCH_POSITION.equals(action)) {
-      if(!hasPermisssion()){
-        PermissionHelper.requestPermissions(this, WATCH_POSITION, permissions);
-      }
+    } else if (action.equals("watchPosition")) {
+      getPermission(WATCH_POSITION);
       try {
         options = args.getJSONObject(0);
       } catch (JSONException e) {
@@ -67,10 +57,8 @@ public class GeolocationPlugin extends CordovaPlugin {
       }
       int watchId = args.getInt(1);
       return watchPosition(options, watchId, callbackContext);
-    } else if (ACTION_CLEAR_WATCH.equals(action)) {
-      if(!hasPermisssion()){
-        PermissionHelper.requestPermissions(this, CLEAR_WATCH, permissions);
-      }
+    } else if (action.equals("clearWatch")) {
+      getPermission(CLEAR_WATCH);
       int watchId = args.getInt(0);
       return clearWatch(watchId, callbackContext);
     }
@@ -117,6 +105,22 @@ public class GeolocationPlugin extends CordovaPlugin {
     });
   }
 
+  /**
+   * 获取对应权限
+   * int requestCode Action代码
+   */
+  public void getPermission(int requestCode){
+    if(!hasPermisssion()){
+      PermissionHelper.requestPermissions(this, requestCode, permissions);
+    }
+  }
+
+  /**
+   * 权限请求结果处理函数
+   * int requestCode Action代码
+   * String[] permissions 权限集合
+   * int[] grantResults 授权结果集合
+   */
   public void onRequestPermissionResult(int requestCode, String[] permissions,
                                          int[] grantResults) throws JSONException
    {
@@ -135,10 +139,10 @@ public class GeolocationPlugin extends CordovaPlugin {
            switch(requestCode)
            {
                case GET_CURRENT_POSITION:
-                   getCurrentPosition(this.options, this.context);
+                   getCurrentPosition(this.requestArgs.getJSONObject(0), this.context);
                    break;
                case WATCH_POSITION:
-                   watchPosition(this.options, this.requestArgs.getInt(1), this.context);
+                   watchPosition(this.requestArgs.getJSONObject(0), this.requestArgs.getInt(1), this.context);
                    break;
                case CLEAR_WATCH:
                    clearWatch(this.requestArgs.getInt(0), this.context);
@@ -147,6 +151,9 @@ public class GeolocationPlugin extends CordovaPlugin {
        }
    }
 
+   /**
+    * 判断是否有对应权限
+    */
    public boolean hasPermisssion() {
        for(String p : permissions)
        {

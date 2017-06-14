@@ -1,0 +1,22 @@
+{
+  "name": "cordova-plugin-baidu-geolocation",
+  "version": "6.2.3",
+  "description": "Baidu Geolocation for Cordova",
+  "main": "Geolocation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation.git"
+  },
+  "keywords": [
+    "geolocation"
+  ],
+  "author": "hjxhhp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation/issues"
+  },
+  "homepage": "https://github.com/ETENG-OSP/cordova-plugin-baidu-geolocation#readme"
+}
